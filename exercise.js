@@ -1,40 +1,26 @@
 const isLogged = true;
 
-function isLoggedIn(userId) {
+function login(data) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let rand = Math.random();
-      if (rand > 0.3) {
-        resolve(userId);
-      } else {
-        reject(new Error("Not logged in!"));
-      }
-    }, 500);
+    if (data) {
+      resolve(Math.random());
+    } else {
+      reject(new Error("Not logged"));
+    }
   });
 }
 
-function getUserDetails(userId) {
+function getUserData(userId) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (userId > 0.5) {
-        resolve({ name: "John", age: 24 });
-      } else {
-        reject(new Error("User Does not exist!"));
-      }
-    }, 500);
+    if (userId > 0.5) {
+      resolve({ name: "John", age: 24 });
+    } else {
+      reject(new Error("No user data"));
+    }
   });
 }
 
-function getUserName({ name, age }) {
-  return `name: ${name}, age: ${age}`;
-}
-
-isLoggedIn(3)
-  .then(getUserDetails)
-  .then(getUserName)
-  .then((name) => {
-    console.log(name);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+login(isLogged)
+  .then(getUserData)
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
